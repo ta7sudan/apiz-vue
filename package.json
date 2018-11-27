@@ -1,6 +1,6 @@
 {
   "name": "@lowb/apiz-vue",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A vue plugin for apiz",
   "main": "dist/apiz-vue.umd.js",
   "module": "dist/apiz-vue.esm.js",
