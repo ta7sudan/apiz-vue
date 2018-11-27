@@ -1,0 +1,75 @@
+{
+  "name": "@lowb/apiz-vue",
+  "version": "0.1.0",
+  "description": "A vue plugin for apiz",
+  "main": "dist/apiz-vue.umd.js",
+  "module": "dist/apiz-vue.esm.js",
+  "browser": "dist/apiz-vue.umd.js",
+  "sideEffects": false,
+  "types": "types/index.d.ts",
+  "typings": "types/index.d.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "prebuild": "rimraf dist",
+    "build-dev": "rollup -c rollup.dev.js",
+    "lint": "eslint src",
+    "format": "prettier --config .prettierrc.js --write src/**/*.js test/**/*.js",
+    "inspect": "jsinspect src",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ta7sudan/@lowb/apiz-vue.git"
+  },
+  "keywords": [
+    "apiz",
+    "vue"
+  ],
+  "author": "ta7sudan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ta7sudan/@lowb/apiz-vue/issues"
+  },
+  "files": [
+    "src",
+    "dist",
+    "example",
+    "types"
+  ],
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm run build && npm run build-dev && git add ."
+    }
+  },
+  "homepage": "https://github.com/ta7sudan/@lowb/apiz-vue#readme",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 9"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-plugin-array-includes": "^2.0.3",
+    "eslint": "^5.7.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "husky": "^1.1.2",
+    "jsinspect": "^0.12.7",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.66.6",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-uglify": "^6.0.0"
+  },
+  "dependencies": {
+    "apiz-browser-client": "^1.0.4",
+    "apiz-ng": "^1.0.0"
+  }
+}
