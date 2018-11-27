@@ -5,6 +5,6 @@ interface PluginOptions extends GroupOptions, Options {
 	meta: object
 }
 
-export class APIs {
+export default class APIs {
 	constructor(options: PluginOptions);
 }
