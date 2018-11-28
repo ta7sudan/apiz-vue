@@ -69,7 +69,7 @@
     "rollup-plugin-uglify": "^6.0.0"
   },
   "dependencies": {
-    "apiz-browser-client": "^1.0.5",
+    "apiz-browser-client": "^2.0.1",
     "apiz-ng": "^1.0.0"
   }
 }
