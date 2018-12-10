@@ -70,6 +70,6 @@
   },
   "dependencies": {
     "apiz-browser-client": "^2.0.1",
-    "apiz-ng": "^1.0.0"
+    "apiz-ng": "^1.0.1"
   }
 }
