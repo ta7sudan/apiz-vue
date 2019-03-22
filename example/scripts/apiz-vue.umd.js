@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('apiz-ng'), require('tinyjx'), require('apiz-browser-client')) :
 	typeof define === 'function' && define.amd ? define(['apiz-ng', 'tinyjx', 'apiz-browser-client'], factory) :
-	(global = global || self, global['@lowb/apiz-vue'] = factory(global.apizNg, global.tinyjx, global.Client));
+	(global = global || self, global['@lowb/apiz-vue'] = factory(global.apizng, global.tinyjx, global.ApizClient));
 }(this, function (apizNg, tinyjx, Client) { 'use strict';
 
 	Client = Client && Client.hasOwnProperty('default') ? Client['default'] : Client;

@@ -53,9 +53,9 @@ export default [
 				format: 'umd',
 				sourcemap: true,
 				globals: {
-					'apiz-ng': 'APIz',
-					'apiz-browser-client': 'apizClient',
-					'tinyjx': 'config'
+					'apiz-ng': 'apizng',
+					'apiz-browser-client': 'ApizClient',
+					'tinyjx': 'tinyjx'
 				}
 			}
 		]
@@ -97,9 +97,9 @@ export default [
 			// sourcemap生成之后在devtools本来看到的文件是src/index.js, 这个选项可以变成apiz-vue.js
 			sourcemapPathTransform: path => ~path.indexOf('index') ? 'apiz-vue.js' : relative('src', path),
 			globals: {
-				'apiz-ng': 'APIz',
-				'apiz-browser-client': 'apizClient',
-				'tinyjx': 'config'
+				'apiz-ng': 'apizng',
+				'apiz-browser-client': 'ApizClient',
+				'tinyjx': 'tinyjx'
 			}
 		}
 	}

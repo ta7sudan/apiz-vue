@@ -18,6 +18,7 @@ export default {
 			exclude: 'node_modules/**'
 		})
 	],
+	external: ['apiz-ng', 'apiz-browser-client', 'tinyjx'],
 	treeshake: {
 		propertyReadSideEffects: false
 	},
@@ -27,6 +28,11 @@ export default {
 		file: 'example/scripts/apiz-vue.umd.js',
 		format: 'umd',
 		sourcemap: true,
-		sourcemapPathTransform: path => ~path.indexOf('index') ? 'apiz-vue.js' : relative('src', path)
+		sourcemapPathTransform: path => ~path.indexOf('index') ? 'apiz-vue.js' : relative('src', path),
+		globals: {
+			'apiz-ng': 'apizng',
+			'apiz-browser-client': 'ApizClient',
+			'tinyjx': 'tinyjx'
+		}
 	}
 };
