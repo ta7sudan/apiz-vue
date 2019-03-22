@@ -1,3 +1,4 @@
+import typescript from 'rollup-plugin-typescript2';
 import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import { uglify } from 'rollup-plugin-uglify';
@@ -16,15 +17,24 @@ const banner = `/**
  * @License: ${license}
  */`;
 
+/**
+ * 虽然讲babel其实已经没必要, 但是建议还是留个babel,
+ * 在某些时候会有些帮助...也不差这点编译时间
+ */
 export default [
 	{
-		input: 'src/index.js',
+		input: 'src/index.ts',
 		plugins: [
+			typescript({
+				tsconfig: 'tsconfig.json',
+				useTsconfigDeclarationDir: true
+			}),
 			replace({
 				DEBUG: JSON.stringify(false)
 			}),
 			babel({
-				exclude: 'node_modules/**'
+				exclude: 'node_modules/**',
+				extensions: ['.js', '.ts']
 			})
 		],
 		external: ['apiz-ng', 'apiz-browser-client', 'tinyjx'],
@@ -51,13 +61,18 @@ export default [
 		]
 	},
 	{
-		input: 'src/index.js',
+		input: 'src/index.ts',
 		plugins: [
+			typescript({
+				tsconfig: 'tsconfig.json',
+				useTsconfigDeclarationDir: true
+			}),
 			replace({
 				DEBUG: JSON.stringify(false)
 			}),
 			babel({
-				exclude: 'node_modules/**'
+				exclude: 'node_modules/**',
+				extensions: ['.js', '.ts']
 			}),
 			uglify({
 				compress: {

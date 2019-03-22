@@ -1,34 +1,21 @@
 import { APIz } from 'apiz-ng';
 import { config } from 'tinyjx';
-import apizClient from 'apiz-browser-client';
+import Client from 'apiz-browser-client';
 
-function _extends() {
-  _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
+/* global false */
 var installed = false;
 
 function APIs(options) {
-  return new APIz(options.meta, _extends({
+  return APIz(options.meta, Object.assign({
     immutableMeta: true,
-    defaultType: 'json',
-    client: apizClient(options)
+    // defaultType: 'json',
+    client: Client(options)
   }, options));
-}
+} // function isAnonymous(apis: any): apis is Instance {
+// 	return apis instanceof APIz;
+// }
+// tslint:disable-next-line
+
 
 APIs.install = function (Vue, _temp) {
   var _ref = _temp === void 0 ? {} : _temp,
@@ -56,6 +43,8 @@ APIs.install = function (Vue, _temp) {
         var apis = this.$options.apis;
 
         switch (true) {
+          // switch true的话类型保护不起作用啊...
+          // 看来只能手动as了
           case apis instanceof APIz:
             Vue.prototype.$apis = apis;
             break;
