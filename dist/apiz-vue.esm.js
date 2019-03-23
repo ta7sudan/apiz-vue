@@ -6,6 +6,9 @@ import Client from 'apiz-browser-client';
 var installed = false;
 
 function APIs(options) {
+  // 这里不用new本来是没关系的, 但是他妈的V8有个bug...
+  // 但是受限于TS的类型检查我又不能在这里用new
+  // 那就只能在下面修复这个问题了
   return APIz(options.meta, Object.assign({
     immutableMeta: true,
     // defaultType: 'json',
@@ -45,7 +48,10 @@ APIs.install = function (Vue, _temp) {
         switch (true) {
           // switch true的话类型保护不起作用啊...
           // 看来只能手动as了
-          case apis instanceof APIz:
+          // 本来instanceof是没什么问题的, 但是V8最近的版本有个bug, 这里会得到false
+          // 所以换Object.getPrototypeOf
+          // case apis instanceof APIz:
+          case Object.getPrototypeOf(apis) === APIz.prototype:
             Vue.prototype.$apis = apis;
             break;
 
