@@ -55,7 +55,7 @@
 	          // 本来instanceof是没什么问题的, 但是V8最近的版本有个bug, 这里会得到false
 	          // 所以换Object.getPrototypeOf
 	          // case apis instanceof APIz:
-	          case Object.getPrototypeOf(apis) === apizNg.APIz.prototype:
+	          case Object.getPrototypeOf(Object.getPrototypeOf(apis)) === apizNg.APIz.prototype:
 	            Vue.prototype.$apis = apis;
 	            break;
 
