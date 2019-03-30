@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "apiz-browser-client": "^4.1.5",
-    "apiz-ng": "^1.1.4",
+    "apiz-ng": "^1.1.5",
     "tslib": "^1.9.3"
   }
 }
