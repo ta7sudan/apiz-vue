@@ -1,6 +1,6 @@
 /* global DEBUG */
 // tslint:disable-next-line
-import { APIz, APIzOptions, APIMeta, APIzInstance } from 'apiz-ng';
+import { APIz, APIzOptions, APIMeta, APIzInstance, HTTPMethodLowerCase } from 'apiz-ng';
 import { config } from 'tinyjx';
 // tslint:disable-next-line
 import Client, { APIzClientInstance, APIzClientType, APIzClientMeta, APIzClientOptions, APIzRequestOptions } from 'apiz-browser-client';
@@ -12,11 +12,11 @@ let installed = false;
 // 	meta: M;
 // }
 
-type Options = APIzOptions<APIzClientInstance> & APIzClientOptions & {
+type Options = APIzOptions<APIzRequestOptions, APIzClientInstance> & APIzClientOptions & {
 	meta: APIMeta<APIzClientType, APIzClientMeta>;
 };
 
-type Instance = APIzInstance<APIzClientType, APIzClientMeta, APIzRequestOptions, APIMeta<APIzClientType, APIzClientMeta>>;
+type Instance = APIzInstance<APIzRequestOptions, APIMeta<APIzClientType, APIzClientMeta>, APIzClientType, APIzClientMeta>;
 
 interface NamedInstance {
 	name: string;
@@ -29,7 +29,7 @@ function APIs<M extends APIMeta<APIzClientType, APIzClientMeta>>(options: Option
 	// 这里不用new本来是没关系的, 但是他妈的V8有个bug...
 	// 但是受限于TS的类型检查我又不能在这里用new
 	// 那就只能在下面修复这个问题了
-	return APIz<APIzClientType, APIzClientMeta, APIzRequestOptions, APIzClientInstance, APIMeta<APIzClientType, APIzClientMeta>>(options.meta, {
+	return APIz<APIzRequestOptions, APIzClientInstance, APIMeta<APIzClientType, APIzClientMeta>, APIzClientType, APIzClientMeta, HTTPMethodLowerCase>(options.meta, {
 		immutableMeta: true,
 		// defaultType: 'json',
 		client: Client(options),
@@ -42,7 +42,7 @@ function APIs<M extends APIMeta<APIzClientType, APIzClientMeta>>(options: Option
 // }
 
 // tslint:disable-next-line
-APIs.install = function (Vue: _Vue, { pool = 5 } = {}) {
+APIs.install = function (Vue: _Vue, { pool = 5 }: { pool?: number | boolean } = {}) {
 	if (installed) {
 		return;
 	}
