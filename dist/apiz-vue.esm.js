@@ -2,15 +2,32 @@ import { APIz } from 'apiz-ng';
 import { config } from 'tinyjx';
 import Client from 'apiz-browser-client';
 
-/* global false */
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
 var installed = false;
 
 function APIs(options) {
   // 这里不用new本来是没关系的, 但是他妈的V8有个bug...
   // 但是受限于TS的类型检查我又不能在这里用new
   // 那就只能在下面修复这个问题了
-  return APIz(options.meta, Object.assign({
-    immutableMeta: true,
+  return APIz(options.meta, _extends({
+    immutable: true,
     // defaultType: 'json',
     client: Client(options)
   }, options));

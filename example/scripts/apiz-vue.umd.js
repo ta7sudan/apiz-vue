@@ -13,9 +13,12 @@
 	    // 这里不用new本来是没关系的, 但是他妈的V8有个bug...
 	    // 但是受限于TS的类型检查我又不能在这里用new
 	    // 那就只能在下面修复这个问题了
-	    return apizNg.APIz(options.meta, Object.assign({ immutableMeta: true, 
+	    return apizNg.APIz(options.meta, {
+	        immutable: true,
 	        // defaultType: 'json',
-	        client: Client(options) }, options));
+	        client: Client(options),
+	        ...options
+	    });
 	}
 	// function isAnonymous(apis: any): apis is Instance {
 	// 	return apis instanceof APIz;

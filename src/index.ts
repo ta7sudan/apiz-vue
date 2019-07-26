@@ -1,22 +1,18 @@
 /* global DEBUG */
 // tslint:disable-next-line
-import { APIz, APIzOptions, APIMeta, APIzInstance, HTTPMethodLowerCase } from 'apiz-ng';
+import { APIz, APIzOptions, APIzInstance, HTTPMethodLowerCase, APIGroup, APIInfo } from 'apiz-ng';
 import { config } from 'tinyjx';
 // tslint:disable-next-line
-import Client, { APIzClientInstance, APIzClientType, APIzClientMeta, APIzClientOptions, APIzRequestOptions } from 'apiz-browser-client';
+import Client, { APIzRawRequestOptions, APIzClientType, APIzClientMeta, APIzClientConstructorOptions } from 'apiz-browser-client';
 import { VueConstructor as _Vue } from 'vue';
 
 let installed = false;
 
-// interface Options<M extends APIMeta<APIzClientType, APIzClientMeta>> extends APIzOptions<APIzClientInstance> {
-// 	meta: M;
-// }
-
-type Options = APIzOptions<APIzRequestOptions, APIzClientInstance> & APIzClientOptions & {
-	meta: APIMeta<APIzClientType, APIzClientMeta>;
+type Options = APIzOptions<APIzRawRequestOptions, APIzClientType, APIzClientMeta, HTTPMethodLowerCase> & APIzClientConstructorOptions & {
+	meta: APIGroup<Record<string, APIInfo<APIzClientType, APIzClientMeta>>>
 };
 
-type Instance = APIzInstance<APIzRequestOptions, APIMeta<APIzClientType, APIzClientMeta>, APIzClientType, APIzClientMeta>;
+type Instance = APIzInstance<APIzRawRequestOptions, Record<string, APIInfo<APIzClientType, APIzClientMeta>>, HTTPMethodLowerCase>;
 
 interface NamedInstance {
 	name: string;
@@ -25,12 +21,12 @@ interface NamedInstance {
 
 // type APIs = Instance | Array<NamedInstance> | NamedInstance;
 
-function APIs<M extends APIMeta<APIzClientType, APIzClientMeta>>(options: Options): Instance {
+function APIs(options: Options): Instance {
 	// 这里不用new本来是没关系的, 但是他妈的V8有个bug...
 	// 但是受限于TS的类型检查我又不能在这里用new
 	// 那就只能在下面修复这个问题了
-	return APIz<APIzRequestOptions, APIzClientInstance, APIMeta<APIzClientType, APIzClientMeta>, APIzClientType, APIzClientMeta, HTTPMethodLowerCase>(options.meta, {
-		immutableMeta: true,
+	return APIz<APIzRawRequestOptions, APIzClientType, APIzClientMeta, HTTPMethodLowerCase>(options.meta, {
+		immutable: true,
 		// defaultType: 'json',
 		client: Client(options),
 		...options
