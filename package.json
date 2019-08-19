@@ -85,7 +85,7 @@
     "vue": "^2.6.10"
   },
   "dependencies": {
-    "apiz-browser-client": "^6.0.1",
+    "apiz-browser-client": "^7.0.0",
     "apiz-ng": "^4.0.1",
     "tslib": "^1.9.3"
   },
